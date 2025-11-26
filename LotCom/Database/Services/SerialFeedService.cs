@@ -35,7 +35,7 @@ public static class SerialFeedService
         {
             throw new JsonException("Could not deserialize an int from the response.");
         }
-        return new SerialNumber(SerializationMode.JBK, PartId, (int)Number);
+        return new SerialNumber(SerializationMode.JBK, PartId, Number.ToString()!);
     }
     
     /// <summary>
@@ -66,6 +66,6 @@ public static class SerialFeedService
         {
             throw new JsonException("Could not deserialize an int from the response.");
         }
-        return new SerialNumber(SerializationMode.JBK, PartId, (int)Number);
+        return new SerialNumber(SerializationMode.Lot, PartId, Number.ToString()!);
     }
 }

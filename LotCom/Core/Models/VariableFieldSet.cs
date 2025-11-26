@@ -191,7 +191,7 @@ public partial class VariableFieldSet(JBKNumber? JBKNumber = null, LotNumber? Lo
         {
             try
             {
-                ParsedSet.LotNumber = new LotNumber(int.Parse(StringFields[Offset]));
+                ParsedSet.LotNumber = new LotNumber(StringFields[Offset]);
                 Offset += 1;
             }
             catch (ArgumentException)

@@ -71,16 +71,16 @@ public class Scan(int Id, Process ScanProcess, DateTime ScanDate, IPAddress Scan
     /// <exception cref="FormatException"></exception>
     public SerialNumber GetSerialNumber()
     {
-        int Literal;
+        string Literal;
         // use the JBK number
         if (LabelProcess.Serialization == SerializationMode.JBK || LabelProcess.PassThroughType == PassThroughType.JBK)
         {
-            Literal = VariableFields.JBKNumber!.Literal;
+            Literal = VariableFields.JBKNumber!.Literal.ToString();
         }
         // use the Lot number
         else if (LabelProcess.Serialization == SerializationMode.Lot || LabelProcess.PassThroughType == PassThroughType.Lot)
         {
-            Literal = VariableFields.LotNumber!.Literal;
+            Literal = VariableFields.LotNumber!.ToString();
         }
         // Process' Serialization is mis-configured
         else

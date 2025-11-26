@@ -18,7 +18,7 @@ public partial class LotNumber : ObservableObject
     private const int MaxValue = 999999999;
 
     /// <summary>
-    /// The raw literal value of the Lot Number.
+    /// The raw literal value of the Lot Number for self-made.
     /// </summary>
     [ObservableProperty]
     public partial int Literal { get; set; }
@@ -70,11 +70,39 @@ public partial class LotNumber : ObservableObject
     }
 
     /// <summary>
-    /// Converts the object into a string. Uses the LotNumber's Literal value as the source for this string.
+    /// Creates a new LotNumber from a string Value.
+    /// </summary>
+    /// <param name="value"></param>
+    public LotNumber(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("LotNumber cannot be null or empty.", nameof(value));
+        }
+
+        Formatted = value.Trim();
+    }
+
+    /// <summary>
+    /// Implicit conversion from string to LotNumber
+    /// </summary>
+    /// <param name="value"></param>
+    public static implicit operator LotNumber(string value) => new LotNumber(value);
+
+    /// <summary>
+    /// Implicit conversion from int to LotNumber
+    /// </summary>
+    /// <param name="value"></param>
+    public static implicit operator LotNumber(int value) => new LotNumber(value);
+
+    /// <summary>
+    /// Converts the object into a string.
+    /// For self-made parts: returns formatted nine-digit string.
+    /// For supplier parts: returns the original supplier lot number.
     /// </summary>
     /// <returns></returns>
     public override string ToString()
     {
-        return FormatLiteral();
+        return Formatted;
     }
 }

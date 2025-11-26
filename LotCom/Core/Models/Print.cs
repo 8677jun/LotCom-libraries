@@ -76,7 +76,7 @@ public class Print(int Id, Process Process, Part Part, VariableFieldSet Variable
         (
             Process.Serialization,
             Part.Id,
-            Literal
+            Literal.ToString()
         );
     }
 }

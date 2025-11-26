@@ -12,7 +12,7 @@ namespace LotCom.Core.Types;
 /// <param name="Mode">The mode of Serialization this Serial Number uses.</param>
 /// <param name="Part">The Part this Serial Number was assigned to.</param>
 /// <param name="Value">The Value to attempt to apply to this Serial Number.</param>
-public class SerialNumber(SerializationMode Mode, int PartId, int Value)
+public class SerialNumber(SerializationMode Mode, int PartId, string Value)
 {
     /// <summary>
     /// The mode of Serialization that the Serial Number uses.
@@ -27,7 +27,7 @@ public class SerialNumber(SerializationMode Mode, int PartId, int Value)
     /// <summary>
     /// The Serial Number's literal value.
     /// </summary>
-    public int Value {get; private set;} = Value;
+    public string Value {get; private set;} = Value;
 
     /// <summary>
     /// Returns the SerialNumber's value as a string with leading zeroes to enforce formatting.
@@ -182,6 +182,6 @@ public class SerialNumber(SerializationMode Mode, int PartId, int Value)
             throw new JsonException($"No Value found in cached Serial Number '{Line}'.");
         }
         Value = int.Parse(RawValue.ToString());
-        return new SerialNumber(Mode, PartId, Value);
+        return new SerialNumber(Mode, PartId, Value.ToString());
     }
 }

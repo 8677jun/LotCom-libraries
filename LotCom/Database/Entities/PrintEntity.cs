@@ -50,7 +50,7 @@ public class PrintEntity(int ProcessId, int PartId, int Quantity, int? Secondary
 
     public int? JBKNumber { get; set; } = JBKNumber;
 
-    [MaxLength(3)]
+    [MaxLength(25)]
     public string? LotNumber { get; set; } = LotNumber;
 
     [MaxLength(3)]
