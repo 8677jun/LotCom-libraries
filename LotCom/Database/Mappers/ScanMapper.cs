@@ -129,10 +129,7 @@ public class ScanMapper : IMapper<Scan, ScanEntity, ScanDto>
         }
         if (Dto.LotNumber is not null)
         {
-            ModelVariableFields.LotNumber = new LotNumber
-            (
-                int.Parse(Dto.LotNumber.Replace(" ", ""))
-            );
+            ModelVariableFields.LotNumber = Dto.LotNumber;
         }
         if (Dto.DieNumber is not null)
         {
@@ -292,7 +289,7 @@ public class ScanMapper : IMapper<Scan, ScanEntity, ScanDto>
         }
         if (Model.VariableFields.LotNumber is not null)
         {
-            Dto.JBKNumber = Model.VariableFields.LotNumber.Literal;
+            Dto.LotNumber = Model.VariableFields.LotNumber.ToString();
         }
         if (Model.VariableFields.DieNumber is not null)
         {

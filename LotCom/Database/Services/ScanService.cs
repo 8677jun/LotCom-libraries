@@ -221,19 +221,7 @@ public static class ScanService
     public static async Task<IEnumerable<Scan>?> GetWithSerialNumber(object serialNumber, HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Scans with serial {serialNumber}");
-        int Serial;
-        if (serialNumber.GetType().Equals(typeof(int)))
-        {
-            Serial = (int)serialNumber;
-        }
-        else if (serialNumber.GetType().Equals(typeof(string)))
-        {
-            Serial = int.Parse((string)serialNumber);
-        }
-        else
-        {
-            throw new ArgumentException($"Cannot query for a Serial Number using an object of type {serialNumber.GetType()}", nameof(serialNumber));
-        }
+        string Serial = serialNumber?.ToString() ?? string.Empty;
         HttpResponseMessage? Response = await Client.GetAsync
         (
             $"https://lotcom.yna.us/api/Scan/serialNumber?serialNumber={Serial}"
