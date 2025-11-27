@@ -1,4 +1,5 @@
 using LotCom.Core.Models;
+using LotCom.Database;
 using LotCom.Database.Auth;
 using LotCom.Database.Balancing;
 using LotCom.Database.Mappers;
@@ -33,7 +34,7 @@ public static class ScanService
     public static async Task<IEnumerable<Scan>?> GetAll(HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Scans");
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Scan");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Scan");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -68,7 +69,7 @@ public static class ScanService
     public static async Task<IEnumerable<Scan>?> GetAllWithinRange(int WithinDaysOfCurrent, HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Scans within {WithinDaysOfCurrent} days");
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Scan/within?days={WithinDaysOfCurrent}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Scan/within?days={WithinDaysOfCurrent}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -104,7 +105,7 @@ public static class ScanService
     public static async Task<Scan?> Get(int id, HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Scan {id}");
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Scan/{id}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Scan/{id}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -136,7 +137,7 @@ public static class ScanService
         Console.WriteLine($"API GET Scans by {ProcessId}");
         HttpResponseMessage? Response = await Client.GetAsync
         (
-            $"https://lotcom.yna.us/api/Scan/by?" +
+            $"{ApiConstants.ApiBaseUrl}/Scan/by?" +
             $"&processId={ProcessId}"
         );
         // ensure that the response was OK and retrieve its contents as JSON
@@ -178,7 +179,7 @@ public static class ScanService
         Console.WriteLine($"API GET Scans on {Date.Date} by {ProcessId}");
         HttpResponseMessage? Response = await Client.GetAsync
         (
-            $"https://lotcom.yna.us/api/Scan/onDateBy?" +
+            $"{ApiConstants.ApiBaseUrl}/Scan/onDateBy?" +
             $"day={Date.Day}" +
             $"&month={Date.Month}" +
             $"&year={Date.Year}" +
@@ -224,7 +225,7 @@ public static class ScanService
         string Serial = serialNumber?.ToString() ?? string.Empty;
         HttpResponseMessage? Response = await Client.GetAsync
         (
-            $"https://lotcom.yna.us/api/Scan/serialNumber?serialNumber={Serial}"
+            $"{ApiConstants.ApiBaseUrl}/Scan/serialNumber?serialNumber={Serial}"
         );
         // ensure that the response was OK and retrieve its contents as JSON
         try
@@ -268,7 +269,7 @@ public static class ScanService
         // send the PUT request
         HttpResponseMessage Response = await Client.PostAsync
         (
-            $"https://lotcom.yna.us/api/Scan",
+            $"{ApiConstants.ApiBaseUrl}/Scan",
             Content
         );
         // ensure that the response was okay
@@ -309,7 +310,7 @@ public static class ScanService
         // send the PUT request
         HttpResponseMessage Response = await Client.PutAsync
         (
-            $"https://lotcom.yna.us/api/Scan/{TargetId}",
+            $"{ApiConstants.ApiBaseUrl}/Scan/{TargetId}",
             Content
         );
         // ensure that the response was okay

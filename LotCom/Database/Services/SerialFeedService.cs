@@ -1,5 +1,6 @@
 using LotCom.Core.Enums;
 using LotCom.Core.Types;
+using LotCom.Database;
 using LotCom.Database.Auth;
 using Newtonsoft.Json;
 
@@ -18,7 +19,7 @@ public static class SerialFeedService
     public static async Task<SerialNumber> ConsumeJBKNumber(int PartId, HttpClient Client, UserAgent Agent)
     {
         // configure and execute the API call
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Serial/consumeJBKFor?partId={PartId}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Serial/consumeJBKFor?partId={PartId}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -49,7 +50,7 @@ public static class SerialFeedService
     public static async Task<SerialNumber> ConsumeLotNumber(int PartId, HttpClient Client, UserAgent Agent)
     {
         // configure and execute the API call
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Serial/consumeLotFor?partId={PartId}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Serial/consumeLotFor?partId={PartId}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {

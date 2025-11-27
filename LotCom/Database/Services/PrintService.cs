@@ -1,4 +1,5 @@
 using LotCom.Core.Models;
+using LotCom.Database;
 using LotCom.Database.Auth;
 using LotCom.Database.Balancing;
 using LotCom.Database.Mappers;
@@ -34,7 +35,7 @@ public static class PrintService
     public static async Task<Print?> Get(int id, HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Print {id}");
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Print/{id}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Print/{id}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -68,7 +69,7 @@ public static class PrintService
         Console.WriteLine($"API GET Prints on {Date.Date} by {ProcessId}");
         HttpResponseMessage? Response = await Client.GetAsync
         (
-            $"https://lotcom.yna.us/api/Print/onDateBy?" +
+            $"{ApiConstants.ApiBaseUrl}/Print/onDateBy?" +
             $"day={Date.Day}" +
             $"&month={Date.Month}" +
             $"&year={Date.Year}" +
@@ -126,7 +127,7 @@ public static class PrintService
         }
         HttpResponseMessage? Response = await Client.GetAsync
         (
-            $"https://lotcom.yna.us/api/Print/serialNumber?serialNumber={Serial}"
+            $"{ApiConstants.ApiBaseUrl}/Print/serialNumber?serialNumber={Serial}"
         );
         // ensure that the response was OK and retrieve its contents as JSON
         try
@@ -170,7 +171,7 @@ public static class PrintService
         // send the PUT request
         HttpResponseMessage Response = await Client.PostAsync
         (
-            $"https://lotcom.yna.us/api/Print",
+            $"{ApiConstants.ApiBaseUrl}/Print",
             Content
         );
         // ensure that the response was okay
@@ -211,7 +212,7 @@ public static class PrintService
         // send the PUT request
         HttpResponseMessage Response = await Client.PutAsync
         (
-            $"https://lotcom.yna.us/api/Print/{TargetId}",
+            $"{ApiConstants.ApiBaseUrl}/Print/{TargetId}",
             Content
         );
         // ensure that the response was okay

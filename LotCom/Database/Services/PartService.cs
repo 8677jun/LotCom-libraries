@@ -1,4 +1,5 @@
 using LotCom.Core.Models;
+using LotCom.Database;
 using LotCom.Database.Auth;
 using LotCom.Database.Mappers;
 using LotCom.Database.Transfer;
@@ -22,7 +23,7 @@ public static class PartService
     public static async Task<IEnumerable<Part>?> GetAll(HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Parts");
-        HttpResponseMessage? Response = await Client.GetAsync("https://lotcom.yna.us/api/Part");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Part");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -57,7 +58,7 @@ public static class PartService
     {
         Console.WriteLine($"API GET Part {id}");
         // configure and execute the API call
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Part/{id}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Part/{id}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -88,7 +89,7 @@ public static class PartService
     {
         Console.WriteLine($"API GET Parts printed by {ProcessId}");
         // configure and execute the API call
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Part/printedById?processId={ProcessId}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Part/printedById?processId={ProcessId}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -123,7 +124,7 @@ public static class PartService
     {
         Console.WriteLine($"API GET Parts scanned by {ProcessId}");
         // configure and execute the API call
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Part/scannedById?processId={ProcessId}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Part/scannedById?processId={ProcessId}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
