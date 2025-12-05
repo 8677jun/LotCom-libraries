@@ -62,7 +62,7 @@ public class ScanEntity(int ScanProcessId, string ScanDate, string ScanAddress, 
 
     public int? JBKNumber { get; set; } = JBKNumber;
 
-    [MaxLength(3)]
+    [MaxLength(25)]
     public string? LotNumber { get; set; } = LotNumber;
 
     [MaxLength(3)]
@@ -80,22 +80,22 @@ public class ScanEntity(int ScanProcessId, string ScanDate, string ScanAddress, 
     /// </summary>
     /// <returns></returns>
     /// <exception cref="FormatException"></exception>
-    public int? GetSerialNumber()
+    public string? GetSerialNumber()
     {
         // use the JBK number
         if (JBKNumber is not null)
         {
-            return (int)JBKNumber;
+            return JBKNumber.ToString();
         }
         // use the Lot number
         else if (LotNumber is not null)
         {
-            return int.Parse(LotNumber);
+            return LotNumber;
         }
         // use the DeburrJBKNumber
         else if (DeburrJBKNumber is not null)
         {
-            return (int)DeburrJBKNumber;
+            return DeburrJBKNumber.ToString();;
         }
         // no number available
         else

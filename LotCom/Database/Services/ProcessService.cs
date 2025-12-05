@@ -1,4 +1,5 @@
 using LotCom.Core.Models;
+using LotCom.Database;
 using LotCom.Database.Auth;
 using LotCom.Database.Mappers;
 using LotCom.Database.Transfer;
@@ -22,7 +23,7 @@ public static class ProcessService
     public static async Task<IEnumerable<Process>?> GetAll(HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Processes");
-        HttpResponseMessage? Response = await Client.GetAsync("https://lotcom.yna.us/api/Process");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Process");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {
@@ -56,7 +57,7 @@ public static class ProcessService
     public static async Task<Process?> Get(int id, HttpClient Client, UserAgent Agent)
     {
         Console.WriteLine($"API GET Process {id}");
-        HttpResponseMessage? Response = await Client.GetAsync($"https://lotcom.yna.us/api/Process/{id}");
+        HttpResponseMessage? Response = await Client.GetAsync($"{ApiConstants.ApiBaseUrl}/Process/{id}");
         // ensure that the response was OK and retrieve its contents as JSON
         try
         {

@@ -242,7 +242,7 @@ public class PrintMapper : IMapper<Print, PrintEntity, PrintDto>
         }
         if (Model.VariableFields.LotNumber is not null)
         {
-            Dto.JBKNumber = Model.VariableFields.LotNumber.Literal;
+            Dto.LotNumber = Model.VariableFields.LotNumber.Literal.ToString();
         }
         if (Model.VariableFields.DieNumber is not null)
         {
