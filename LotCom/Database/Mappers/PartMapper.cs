@@ -21,7 +21,8 @@ public class PartMapper : IMapper<Part, PartEntity, PartDto>
                 Dto.PrintedBy,
                 Dto.Number,
                 Dto.Name,
-                new ModelNumber(Dto.ModelCode)
+                new ModelNumber(Dto.ModelCode),
+                Dto.ScannedBy
             );
         });
     }

@@ -10,7 +10,8 @@ namespace LotCom.Core.Models;
 /// <param name="PartNumber">The Part Number assigned to the Part.</param>
 /// <param name="PartName">The Part Name assigned to the Part.</param>
 /// <param name="ModelNumber">The Model Number the Part is associated with.</param>
-public partial class Part(int Id, int ParentProcess, string PartNumber, string PartName, ModelNumber ModelNumber) : ObservableObject
+/// <param name="ScannedBy">Id of operator who scanned this part (default 0 for compatibility).</param>
+public partial class Part(int Id, int ParentProcess, string PartNumber, string PartName, ModelNumber ModelNumber, int ScannedBy = 0) : ObservableObject
 {
     /// <summary>
     /// Provides a formatted string to display in a ListView; includes the Part Number and Name.
@@ -27,6 +28,12 @@ public partial class Part(int Id, int ParentProcess, string PartNumber, string P
     /// </summary>
     [ObservableProperty]
     public partial int ParentProcess { get; set; } = ParentProcess;
+
+    /// <summary>
+    /// [Observable] Operator ID who scanned this part.
+    /// </summary>
+    [ObservableProperty]
+    public partial int ScannedBy { get; set; } = ScannedBy;
 
     /// <summary>
     /// [Observable] The Part Number assigned to the Part.
